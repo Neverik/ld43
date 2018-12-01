@@ -1,8 +1,8 @@
 extends StaticBody2D
 
 export var to_spawn = "res://Scenes/Entities/Guy.tscn"
-export var timeout = 4.0
-export var offset = 3.0
+export var timeout = 6.0
+export var offset = 4.0
 onready var spawn_scene = load(to_spawn)
 export var variance = 400
 var timer

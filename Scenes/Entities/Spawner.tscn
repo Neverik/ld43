@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 0, 0 )
 
 [node name="Spawner" type="StaticBody2D"]
 
@@ -19,7 +19,7 @@ friction = 1.0
 bounce = 0.0
 script = ExtResource( 1 )
 to_spawn = "res://Scenes/Entities/Guy.tscn"
-timeout = 4.0
+timeout = 6.0
 offset = 3.0
 variance = 400
 
@@ -27,9 +27,8 @@ variance = 400
 "Wall",
 ]]
 
-visible = false
-position = Vector2( 0, 736 )
-scale = Vector2( 2.96154, 135.385 )
+position = Vector2( 115.25, 4672 )
+scale = Vector2( -5.90384, 1.22792e-05 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Music/menu.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Players/RPG/RPGPlayer.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Utils/Fader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Entities/Spawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Utils/Wall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=8]
 
 [node name="Root" type="Node2D" index="0"]
 
@@ -27,8 +28,7 @@ speed = 400
 clicker = false
 do_shoot = true
 bullet = "res://Scenes/Entities/Bullet.tscn"
-timer_interval = 5
-score_mult = 0.03
+shoot_cost = 0.005
 
 [node name="Camera2D" type="Camera2D" parent="." index="2" groups=[
 "Wall",
@@ -38,7 +38,7 @@ position = Vector2( 448, 320 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 4, 4 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -84,24 +84,147 @@ margin_bottom = 640.0
 
 [node name="Spawners" type="Node2D" parent="." index="4"]
 
+editor/display_folded = true
+
 [node name="Spawner" parent="Spawners" index="0" instance=ExtResource( 6 )]
 
-position = Vector2( -320, 320 )
+position = Vector2( -1856, 384 )
 scale = Vector2( 1.5, 1.5 )
+offset = 4.0
 
-[node name="Wall" parent="." index="5" instance=ExtResource( 7 )]
+[node name="Spawner4" parent="Spawners" index="1" instance=ExtResource( 6 )]
 
-position = Vector2( 3763.72, 3.89326 )
+position = Vector2( -1808, -1360 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner5" parent="Spawners" index="2" instance=ExtResource( 6 )]
+
+position = Vector2( -1872, 1776 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner8" parent="Spawners" index="3" instance=ExtResource( 6 )]
+
+position = Vector2( -2384, 3376 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner2" parent="Spawners" index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 3572.83, 453.748 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner3" parent="Spawners" index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 3620.83, -1290.25 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner6" parent="Spawners" index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 3556.83, 1845.75 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner7" parent="Spawners" index="7" instance=ExtResource( 6 )]
+
+position = Vector2( 3044.83, 3445.75 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawners2" type="Node2D" parent="." index="5"]
+
+rotation = 2.74304
+
+[node name="Spawner" parent="Spawners2" index="0" instance=ExtResource( 6 )]
+
+position = Vector2( -1856, 384 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner4" parent="Spawners2" index="1" instance=ExtResource( 6 )]
+
+position = Vector2( -1808, -1360 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner5" parent="Spawners2" index="2" instance=ExtResource( 6 )]
+
+position = Vector2( -1872, 1776 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner8" parent="Spawners2" index="3" instance=ExtResource( 6 )]
+
+position = Vector2( -2384, 3376 )
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner2" parent="Spawners2" index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 3572.83, 453.748 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner3" parent="Spawners2" index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 3620.83, -1290.25 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner6" parent="Spawners2" index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 3556.83, 1845.75 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Spawner7" parent="Spawners2" index="7" instance=ExtResource( 6 )]
+
+position = Vector2( 3044.83, 3445.75 )
+rotation = 3.08835
+scale = Vector2( 1.5, 1.5 )
+offset = 4.0
+
+[node name="Walls" type="Node2D" parent="." index="6"]
+
+editor/display_folded = true
+position = Vector2( 6741.76, 82.8221 )
 rotation = -3.13658
+scale = Vector2( 2, 2 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Wall2" parent="." index="6" instance=ExtResource( 7 )]
+[node name="Wall" parent="Walls" index="0" instance=ExtResource( 7 )]
 
-position = Vector2( 1222.49, -1849.48 )
-rotation = -4.72274
+[node name="Wall2" parent="Walls" index="1" instance=ExtResource( 7 )]
 
-[node name="Wall3" parent="." index="7" instance=ExtResource( 7 )]
+position = Vector2( 2550.49, 1840.61 )
+rotation = -1.58616
+scale = Vector2( 1, 1 )
 
-position = Vector2( 1298.92, 1933.7 )
-rotation = -1.58517
+[node name="Wall3" parent="Walls" index="2" instance=ExtResource( 7 )]
+
+position = Vector2( 2455.1, -1942.14 )
+rotation = 1.55141
+
+[node name="Wall4" parent="Walls" index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 5961.06, -254.5 )
+rotation = 3.12394
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="7" groups=[
+"Bullet",
+]]
+
+texture = ExtResource( 8 )
 
 

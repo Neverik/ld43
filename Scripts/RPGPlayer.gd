@@ -7,7 +7,7 @@ export var do_shoot = false
 export var bullet = ""
 onready var muzzle = $Muzzlo/Muzzle
 var health = 1
-export var shoot_cost = 0.025
+export var shoot_cost = 0.005
 var score = 0
 export var timer_interval = 5
 export var score_mult = 0.03
@@ -45,7 +45,7 @@ func get_input():
 	get_node("../CanvasLayer/Fader").set_progress(health)
 
 func _physics_process(delta):
-	print(score)
+	health -= 0.01 * delta
 	if clicker:
 		velocity = (target - position).normalized() * speed
 		if (target - position).length() > 5:
@@ -54,19 +54,25 @@ func _physics_process(delta):
 	    get_input()
 	    move_and_slide(velocity)
 	if do_shoot:
-		var shooting = true
-		if Input.is_action_just_pressed("SLeft"):
-			$Muzzlo.look_at(global_position + Vector2(-1, 0))
-		elif Input.is_action_just_pressed("SRight"):
-			$Muzzlo.look_at(global_position + Vector2(1, 0))
-		elif Input.is_action_just_pressed("SUp"):
-			$Muzzlo.look_at(global_position + Vector2(0, -1))
-		elif Input.is_action_just_pressed("SDown"):
-			$Muzzlo.look_at(global_position + Vector2(0, 1))
-		else:
-			shooting = false
+		var shooting = false
+		var velo = Vector2(0, 0)
+		if Input.is_action_pressed("SLeft"):
+			shooting = true
+			velo += Vector2(-1, 0)
+		if Input.is_action_pressed("SRight"):
+			shooting = true
+			velo += Vector2(1, 0)
+		if Input.is_action_pressed("SUp"):
+			shooting = true
+			velo += Vector2(0, -1)
+		if Input.is_action_pressed("SDown"):
+			shooting = true
+			velo += Vector2(0, 1)
 		if shooting:
+			$Muzzlo.look_at(global_position + velo)
 			shoot()
+	if health <= 0:
+		Manager.die()
 
 func _input(event):
 	if event.is_action_pressed('Click'):
@@ -79,8 +85,6 @@ func _input(event):
 
 func shoot():
 	health -= shoot_cost
-	if health <= 0:
-		Manager.die()
 	var b = bullet.instance()
 	b.global_position = muzzle.global_position
 	b.rotation = $Muzzlo.rotation
