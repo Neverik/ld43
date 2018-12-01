@@ -7,30 +7,42 @@ export var do_shoot = false
 export var bullet = ""
 onready var muzzle = $Muzzlo/Muzzle
 var health = 1
-export var shoot_cost = 0.005
+export var shoot_cost = 0.02
 var score = 0
-export var timer_interval = 5
-export var score_mult = 0.03
+export var timer_interval = 15
+export var score_mult = 0.05
+export var decay = 0.02
 var timer
+var l = 0
+export var tou = 0.25
+var initial
+var flashing_in = false
+var flashing_out = false
+onready var fade = get_node("../CanvasLayer/Fade")
 
 var velocity = Vector2()
 
 func _ready():
 	if do_shoot:
 		bullet = load(bullet)
+	"""initial = scale
 	timer = Timer.new()
 	timer.name = "Timer"
 	timer.connect("timeout",self,"tout") 
 	timer.set_wait_time(timer_interval)
 	add_child(timer)
-	timer.start()
+	timer.start()"""
 
 func tout():
 	health += score * score_mult
 	health = min(1, health)
+	if score != 0:
+		flashing_in = true
 	score = 0
 
 func get_input():
+	"""if Input.is_action_just_pressed("Reload"):
+		tout()"""
 	if not clicker:
 	    velocity = Vector2()
 	    if Input.is_action_pressed('Right'):
@@ -45,7 +57,7 @@ func get_input():
 	get_node("../CanvasLayer/Fader").set_progress(health)
 
 func _physics_process(delta):
-	health -= 0.01 * delta
+	health -= decay * delta
 	if clicker:
 		velocity = (target - position).normalized() * speed
 		if (target - position).length() > 5:
@@ -68,11 +80,32 @@ func _physics_process(delta):
 		if Input.is_action_pressed("SDown"):
 			shooting = true
 			velo += Vector2(0, 1)
-		if shooting:
+		l += delta
+		if shooting and l >= tou:
+			l = 0
 			$Muzzlo.look_at(global_position + velo)
 			shoot()
-	if health <= 0:
+	if health <= 0 and not (Manager.fading_out):
 		Manager.die()
+	if health <= 0.1:
+		tout()
+	get_node("../CanvasLayer/Hits").text = \
+		"POTENTIAL ENERGY: " + str(score) + \
+		"\nSCORE: " + str(Manager.total_score)
+	if flashing_in:
+		fade.color.r = 1
+		fade.color.g = 1
+		fade.color.b = 1
+		fade.color.a += delta * 6
+		if fade.color.a >= 1.0:
+			fade.color.a = 1.0
+			flashing_in = false
+			flashing_out = true
+	elif flashing_out:
+		fade.color.a -= delta * 6
+		if fade.color.a <= 0.0:
+			fade.color.a = 0.0
+			flashing_out = false
 
 func _input(event):
 	if event.is_action_pressed('Click'):

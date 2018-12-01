@@ -17,7 +17,6 @@ func _ready():
 	timer.start()
 
 func tout():
-	print("spawn")
 	var scene = spawn_scene.instance()
 	scene.global_position = $SpawnPoint.global_position 
 	scene.global_position = scene.global_position + Vector2(0, rand_range(-variance, variance))
