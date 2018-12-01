@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Music/menu.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/Players/RPG/RPGPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Utils/Pause.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Utils/Fader.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Utils/Wall.tscn" type="PackedScene" id=7]
+
+[node name="Root" type="Node2D" index="0"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="0"]
+
+stream = ExtResource( 1 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
+
+[node name="Player" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 448, 320 )
+_sections_unfolded = [ "Pickable" ]
+speed = 400
+clicker = false
+do_shoot = true
+bullet = "res://Scenes/Entities/Bullet.tscn"
+timer_interval = 5
+score_mult = 0.03
+
+[node name="Camera2D" type="Camera2D" parent="." index="2" groups=[
+"Wall",
+]]
+
+position = Vector2( 448, 320 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 2, 2 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 3 )
+_sections_unfolded = [ "Smoothing" ]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Pause" parent="CanvasLayer" index="0" instance=ExtResource( 4 )]
+
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -896.0
+margin_right = -128.0
+_sections_unfolded = [ "Anchor", "Pause", "Visibility" ]
+
+[node name="Fader" parent="CanvasLayer" index="1" instance=ExtResource( 5 )]
+
+margin_top = 576.0
+margin_bottom = 640.0
+
+[node name="Spawners" type="Node2D" parent="." index="4"]
+
+[node name="Spawner" parent="Spawners" index="0" instance=ExtResource( 6 )]
+
+position = Vector2( -320, 320 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Wall" parent="." index="5" instance=ExtResource( 7 )]
+
+position = Vector2( 3763.72, 3.89326 )
+rotation = -3.13658
+
+[node name="Wall2" parent="." index="6" instance=ExtResource( 7 )]
+
+position = Vector2( 1222.49, -1849.48 )
+rotation = -4.72274
+
+[node name="Wall3" parent="." index="7" instance=ExtResource( 7 )]
+
+position = Vector2( 1298.92, 1933.7 )
+rotation = -1.58517
+
+

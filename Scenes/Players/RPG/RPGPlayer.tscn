@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/RPGPlayer.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Player" type="KinematicBody2D"]
+
+scale = Vector2( 1.5, 1.5 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+speed = 500
+clicker = true
+do_shoot = false
+bullet = "res://Scenes/Bullet.tscn"
+shoot_cost = 0.025
+timer_interval = 5
+score_mult = 0.03
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+scale = Vector2( 3.78205, 3.78205 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+modulate = Color( 0.417969, 0.69989, 1, 1 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Muzzlo" type="Node2D" parent="." index="2"]
+
+[node name="Muzzle" type="Node2D" parent="Muzzlo" index="0"]
+
+position = Vector2( 85.3333, 0 )
+
+

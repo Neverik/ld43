@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Spawner" type="StaticBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script = ExtResource( 1 )
+to_spawn = "res://Scenes/Entities/Guy.tscn"
+timeout = 4.0
+offset = 3.0
+variance = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0" groups=[
+"Wall",
+]]
+
+visible = false
+position = Vector2( 0, 736 )
+scale = Vector2( 2.96154, 135.385 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -1648, 640 )
+scale = Vector2( 52.5, 98 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="SpawnPoint" type="Node2D" parent="." index="2"]
+
+position = Vector2( 128, 0 )
+
+
