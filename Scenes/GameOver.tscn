@@ -165,6 +165,6 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 0 )
 _sections_unfolded = [ "Mouse" ]
 
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="click"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="sclick"]
 
 

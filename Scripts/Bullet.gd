@@ -7,7 +7,7 @@ var app
 
 func _ready():
 	vel = Vector2(speed, 0).rotated(rotation)
-	var objs = [$Worm, $Leaf, $Worm2]
+	var objs = [$Worm, $Leaf, $Worm2, $Grass, $Bread]
 	for i in objs:
 		i.hide()
 	var r = randi() % len(objs)

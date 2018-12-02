@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/chervak.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/leaf.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/chervak2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/grass.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/bread.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -14,7 +16,6 @@ extents = Vector2( 10, 10 )
 "Bullet",
 ]]
 
-modulate = Color( 0.318282, 0.914062, 0.267792, 1 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -57,6 +58,22 @@ modulate = Color( 0.757812, 0.393707, 0.393707, 1 )
 position = Vector2( -0.93148, 2.21174 )
 scale = Vector2( 0.239658, 0.251459 )
 texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Grass" type="Sprite" parent="." index="5"]
+
+visible = false
+position = Vector2( 10.8945, 5.00881 )
+scale = Vector2( 0.45392, 0.424516 )
+texture = ExtResource( 5 )
+
+[node name="Bread" type="Sprite" parent="." index="6"]
+
+visible = false
+modulate = Color( 0.5625, 0.5625, 0.5625, 1 )
+position = Vector2( 2.12833, -1.95636 )
+scale = Vector2( 0.271405, 0.263054 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Visibility" ]
 
 

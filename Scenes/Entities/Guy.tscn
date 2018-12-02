@@ -70,7 +70,7 @@ rect = Rect2( -10, -10, 20, 20 )
 
 editor/display_folded = true
 visible = false
-position = Vector2( -0.128121, 9.43801 )
+position = Vector2( -0.0229068, 1.68742 )
 scale = Vector2( 0.24, 0.24 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
@@ -97,7 +97,7 @@ texture = ExtResource( 5 )
 
 editor/display_folded = true
 visible = false
-position = Vector2( 0.74735, 14.6481 )
+position = Vector2( 0.133619, 2.61894 )
 scale = Vector2( 0.24, 0.24 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]

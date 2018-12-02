@@ -23,6 +23,10 @@ bullet = "res://Scenes/Bullet.tscn"
 shoot_cost = 0.025
 timer_interval = 5
 score_mult = 0.03
+decay = 0.02
+tou = 0.25
+shake_amount = 10
+shake_length = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
@@ -31,7 +35,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
-modulate = Color( 0.417969, 0.69989, 1, 1 )
+modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Visibility" ]
 
