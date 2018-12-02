@@ -4,15 +4,46 @@ var vel
 var is_hit = false
 var size = 1
 var spawner
-var max_size = 9
+export var max_size = 7
+export var mult = 1.4
 onready var player = spawner.get_node("../../Player")
 export var min_wait_time = 2
+var initial_x
+var scaling = true
+onready var notif = $VisibilityNotifier2D
+var w = false
+export var fade_speed = 20
+var d = false
+export var die_speed = 10
 
 func _ready():
+	initial_x = scale.x
 	vel = Vector2(speed, 0).rotated(rotation)
-	rotation = 0
+	global_rotation = 0
+	scale = Vector2(0, 0)
+	$AnimationPlayer.current_animation = "walk"
+	$Horizontal.show()
+	$Vertical.hide()
 
 func _process(delta):
+	if w:
+		position.y -= fade_speed
+		if not notif.is_on_screen():
+			queue_free()
+		return
+	if d:
+		var s = delta * die_speed
+		scale -= Vector2(s, s)
+		if scale.x <= 0:
+			queue_free()
+		return
+	if scaling:
+		var s = delta * 6
+		scale += Vector2(s, s)
+		if scale.x >= initial_x:
+			scaling = false
+			scale = Vector2(initial_x, initial_x)
+		return
 	var x = 0.07
 	vel = vel.rotated(rand_range(-x, x))
 	if position.distance_to(player.position) < 200:
@@ -20,22 +51,35 @@ func _process(delta):
 		vel = vel.linear_interpolate(dist, 0.5)
 	var col = move_and_collide(vel * delta)
 	if col:
-		if col.collider.is_in_group("Bullet"):
+		if notif.is_on_screen() and col.collider.is_in_group("Bullet"):
 			col.collider.explode()
 			ht()
-		elif col.collider.is_in_group("Wall"):
+		if col.collider.is_in_group("Wall"):
 			die()
 		vel = vel.bounce(col.normal)
 	if is_hit:
 		hit()
 	is_hit = false
+	if abs(vel.normalized().x) > abs(vel.normalized().y):
+		$Vertical.show()
+		$Horizontal.hide()
+		if vel.x < 0:
+			$Vertical.scale.x = -abs($Vertical.scale.x)
+		else:
+			$Vertical.scale.x = abs($Vertical.scale.x)
+	else:
+		$Horizontal.show()
+		$Vertical.hide()
+	
 
 func die():
-	queue_free()
+	d = true
 
 func hit():
+	if not player.shaky:
+		player.shaky = true
 	size += 1
-	scale *= 1.4
+	scale *= mult
 	if size >= max_size:
 		return win()
 	get_node("../../Player").score += 1
@@ -46,7 +90,9 @@ func hit():
 				i.timer.set_wait_time(i.timer.wait_time * 0.98)
 
 func win():
-	queue_free()
+	w = true
+	show_on_top = true
+	$CollisionShape2D.scale = Vector2(0, 0)
 
 func ht():
 	is_hit = true

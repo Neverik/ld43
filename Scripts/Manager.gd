@@ -14,6 +14,7 @@ func _ready():
 
 func _on_scene_loaded(scn):
 	fade = scn.get_node("CanvasLayer/Fade")
+	fade.show()
 	fade.color.a = 1
 	fading_in = true
 
@@ -37,7 +38,7 @@ func _process(delta):
 			fading_out = false
 
 func load_game():
-	goto_scene("res://Scenes/Game.tscn")
+	goto_scene("res://Scenes/Intro.tscn")
 	randomize()
 
 func goto_scene(path):

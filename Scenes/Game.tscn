@@ -1,20 +1,20 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Music/menu.wav" type="AudioStream" id=1]
-[ext_resource path="res://Scenes/Players/RPG/RPGPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Utils/Fader.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Fonts/roboto/Roboto-Bold.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Scenes/Utils/Pause.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Entities/Spawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Utils/Wall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Utils/Fader.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fonts/roboto/Roboto-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/Utils/Pause.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Utils/Wall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Players/RPG/RPGPlayer.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 35
+size = 140
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 5 )
+font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Resource", "Settings" ]
 
 [node name="Root" type="Node2D"]
@@ -28,21 +28,7 @@ autoplay = true
 mix_target = 0
 bus = "Master"
 
-[node name="Player" parent="." index="1" instance=ExtResource( 2 )]
-
-position = Vector2( 448, 320 )
-_sections_unfolded = [ "Pickable" ]
-speed = 400
-clicker = false
-do_shoot = true
-bullet = "res://Scenes/Entities/Bullet.tscn"
-shoot_cost = 0.02
-timer_interval = 15
-score_mult = 0.05
-decay = 0.02
-tou = 0.25
-
-[node name="Camera2D" type="Camera2D" parent="." index="2" groups=[
+[node name="Camera2D" type="Camera2D" parent="." index="1" groups=[
 "Wall",
 ]]
 
@@ -69,10 +55,10 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Smoothing" ]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="2"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -80,7 +66,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Fader" parent="CanvasLayer" index="0" instance=ExtResource( 4 )]
+[node name="Fader" parent="CanvasLayer" index="0" instance=ExtResource( 3 )]
 
 margin_top = 576.0
 margin_bottom = 640.0
@@ -91,8 +77,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 501.0
-margin_bottom = 146.0
+margin_left = 522.0
+margin_top = -13.0
+margin_right = 1023.0
+margin_bottom = 152.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -100,13 +88,16 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
-text = "HITS: 0"
+custom_colors/font_color = Color( 1, 0.960938, 0, 1 )
+text = "0"
+align = 2
+uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Pause" parent="CanvasLayer" index="2" instance=ExtResource( 6 )]
+[node name="Pause" parent="CanvasLayer" index="2" instance=ExtResource( 5 )]
 
 anchor_left = 1.0
 anchor_right = 1.0
@@ -116,6 +107,7 @@ _sections_unfolded = [ "Anchor", "Pause", "Visibility" ]
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer" index="3"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -131,120 +123,120 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 0 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
-[node name="Spawners" type="Node2D" parent="." index="4"]
+[node name="Spawners" type="Node2D" parent="." index="3"]
 
 editor/display_folded = true
 
-[node name="Spawner" parent="Spawners" index="0" instance=ExtResource( 7 )]
+[node name="Spawner" parent="Spawners" index="0" instance=ExtResource( 6 )]
 
-position = Vector2( -1856, 384 )
+position = Vector2( -1830.01, -655.704 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner4" parent="Spawners" index="1" instance=ExtResource( 7 )]
+[node name="Spawner4" parent="Spawners" index="1" instance=ExtResource( 6 )]
 
-position = Vector2( -1808, -1360 )
+position = Vector2( -1782.01, -2399.7 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner5" parent="Spawners" index="2" instance=ExtResource( 7 )]
+[node name="Spawner5" parent="Spawners" index="2" instance=ExtResource( 6 )]
 
-position = Vector2( -1872, 1776 )
+position = Vector2( -1846.01, 736.296 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner8" parent="Spawners" index="3" instance=ExtResource( 7 )]
+[node name="Spawner8" parent="Spawners" index="3" instance=ExtResource( 6 )]
 
-position = Vector2( -2384, 3376 )
+position = Vector2( -2358.01, 2336.3 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner2" parent="Spawners" index="4" instance=ExtResource( 7 )]
+[node name="Spawner2" parent="Spawners" index="4" instance=ExtResource( 6 )]
 
-position = Vector2( 3572.83, 453.748 )
+position = Vector2( 3598.82, -585.956 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner3" parent="Spawners" index="5" instance=ExtResource( 7 )]
+[node name="Spawner3" parent="Spawners" index="5" instance=ExtResource( 6 )]
 
-position = Vector2( 3620.83, -1290.25 )
+position = Vector2( 3646.82, -2329.96 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner6" parent="Spawners" index="6" instance=ExtResource( 7 )]
+[node name="Spawner6" parent="Spawners" index="6" instance=ExtResource( 6 )]
 
-position = Vector2( 3556.83, 1845.75 )
+position = Vector2( 3582.82, 806.044 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner7" parent="Spawners" index="7" instance=ExtResource( 7 )]
+[node name="Spawner7" parent="Spawners" index="7" instance=ExtResource( 6 )]
 
-position = Vector2( 3044.83, 3445.75 )
+position = Vector2( 3070.82, 2406.04 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawners2" type="Node2D" parent="." index="5"]
+[node name="Spawners2" type="Node2D" parent="." index="4"]
 
 editor/display_folded = true
 rotation = 2.74304
 
-[node name="Spawner" parent="Spawners2" index="0" instance=ExtResource( 7 )]
+[node name="Spawner" parent="Spawners2" index="0" instance=ExtResource( 6 )]
 
-position = Vector2( -1856, 384 )
+position = Vector2( -3408.05, -551.576 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner4" parent="Spawners2" index="1" instance=ExtResource( 7 )]
+[node name="Spawner4" parent="Spawners2" index="1" instance=ExtResource( 6 )]
 
-position = Vector2( -1808, -1360 )
+position = Vector2( -3360.05, -2295.58 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner5" parent="Spawners2" index="2" instance=ExtResource( 7 )]
+[node name="Spawner5" parent="Spawners2" index="2" instance=ExtResource( 6 )]
 
-position = Vector2( -1872, 1776 )
+position = Vector2( -3424.05, 840.424 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner8" parent="Spawners2" index="3" instance=ExtResource( 7 )]
+[node name="Spawner8" parent="Spawners2" index="3" instance=ExtResource( 6 )]
 
-position = Vector2( -2384, 3376 )
+position = Vector2( -3936.05, 2440.42 )
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner2" parent="Spawners2" index="4" instance=ExtResource( 7 )]
+[node name="Spawner2" parent="Spawners2" index="4" instance=ExtResource( 6 )]
 
-position = Vector2( 3572.83, 453.748 )
+position = Vector2( 2020.78, -481.828 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner3" parent="Spawners2" index="5" instance=ExtResource( 7 )]
+[node name="Spawner3" parent="Spawners2" index="5" instance=ExtResource( 6 )]
 
-position = Vector2( 3620.83, -1290.25 )
+position = Vector2( 2068.78, -2225.83 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner6" parent="Spawners2" index="6" instance=ExtResource( 7 )]
+[node name="Spawner6" parent="Spawners2" index="6" instance=ExtResource( 6 )]
 
-position = Vector2( 3556.83, 1845.75 )
+position = Vector2( 2004.78, 910.172 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Spawner7" parent="Spawners2" index="7" instance=ExtResource( 7 )]
+[node name="Spawner7" parent="Spawners2" index="7" instance=ExtResource( 6 )]
 
-position = Vector2( 3044.83, 3445.75 )
+position = Vector2( 1492.78, 2510.17 )
 rotation = 3.08835
 scale = Vector2( 1.5, 1.5 )
 offset = 4.0
 
-[node name="Walls" type="Node2D" parent="." index="6"]
+[node name="Walls" type="Node2D" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( 6741.76, 82.8221 )
@@ -252,23 +244,41 @@ rotation = -3.13658
 scale = Vector2( 2, 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Wall" parent="Walls" index="0" instance=ExtResource( 8 )]
+[node name="Wall" parent="Walls" index="0" instance=ExtResource( 7 )]
 
-[node name="Wall2" parent="Walls" index="1" instance=ExtResource( 8 )]
+position = Vector2( -133.516, -449.645 )
 
-position = Vector2( 2550.49, 1840.61 )
+[node name="Wall2" parent="Walls" index="1" instance=ExtResource( 7 )]
+
+position = Vector2( 2666.79, 2036.11 )
 rotation = -1.58616
 scale = Vector2( 1, 1 )
 
-[node name="Wall3" parent="Walls" index="2" instance=ExtResource( 8 )]
+[node name="Wall3" parent="Walls" index="2" instance=ExtResource( 7 )]
 
-position = Vector2( 2455.1, -1942.14 )
+position = Vector2( 2612.97, -2190.57 )
 rotation = 1.55141
 
-[node name="Wall4" parent="Walls" index="3" instance=ExtResource( 8 )]
+[node name="Wall4" parent="Walls" index="3" instance=ExtResource( 7 )]
 
-position = Vector2( 5961.06, -254.5 )
+position = Vector2( 6029.58, -320.88 )
 rotation = 3.12394
 scale = Vector2( 1, 1 )
+
+[node name="Player" parent="." index="6" instance=ExtResource( 8 )]
+
+position = Vector2( 448, 320 )
+_sections_unfolded = [ "Pickable" ]
+speed = 400
+clicker = false
+do_shoot = true
+bullet = "res://Scenes/Entities/Bullet.tscn"
+shoot_cost = 0.02
+timer_interval = 15
+score_mult = 0.05
+decay = 0.02
+tou = 0.25
+shake_amount = 10
+shake_length = 0.5
 
 

@@ -19,12 +19,18 @@ var initial
 var flashing_in = false
 var flashing_out = false
 onready var fade = get_node("../CanvasLayer/Fade")
+var shaky = false
+export var shake_amount = 10
+var shaking_for = 0
+export var shake_length = 0.5
+onready var camera = get_node("../Camera2D")
 
 var velocity = Vector2()
 
 func _ready():
 	if do_shoot:
 		bullet = load(bullet)
+	fade.show()
 	"""initial = scale
 	timer = Timer.new()
 	timer.name = "Timer"
@@ -87,11 +93,9 @@ func _physics_process(delta):
 			shoot()
 	if health <= 0 and not (Manager.fading_out):
 		Manager.die()
-	if health <= 0.1:
+	if health <= 0.2:
 		tout()
-	get_node("../CanvasLayer/Hits").text = \
-		"POTENTIAL ENERGY: " + str(score) + \
-		"\nSCORE: " + str(Manager.total_score)
+	get_node("../CanvasLayer/Hits").text = str(Manager.total_score)
 	if flashing_in:
 		fade.color.r = 1
 		fade.color.g = 1
@@ -102,10 +106,22 @@ func _physics_process(delta):
 			flashing_in = false
 			flashing_out = true
 	elif flashing_out:
+		fade.color.r = 1
+		fade.color.g = 1
+		fade.color.b = 1
 		fade.color.a -= delta * 6
 		if fade.color.a <= 0.0:
 			fade.color.a = 0.0
 			flashing_out = false
+	if shaky:
+		camera.set_offset(Vector2( \
+	        rand_range(-shake_amount, shake_amount), \
+	        rand_range(-shake_amount, shake_amount) \
+	    ))
+		shaking_for += delta
+		if shaking_for >= shake_length:
+			shaky = false
+			shaking_for = 0
 
 func _input(event):
 	if event.is_action_pressed('Click'):
