@@ -33,6 +33,7 @@ func _ready():
 		bullet = load(bullet)
 	if fade:
 		fade.show()
+	Manager.num_chicks = 0
 	"""initial = scale
 	timer = Timer.new()
 	timer.name = "Timer"
@@ -61,8 +62,7 @@ func get_input():
 			velocity.y += 1
 		if Input.is_action_pressed('Up'):
 			velocity.y -= 1
-		pos.x = velocity.x
-		pos.y = velocity.y
+		pos = velocity
 		velocity = velocity.normalized() * speed
 	get_node("../CanvasLayer/Fader").set_progress(health)
 
@@ -90,8 +90,6 @@ func _physics_process(delta):
 		if Input.is_action_pressed("SDown"):
 			shooting = true
 			velo += Vector2(0, 1)
-		if velo.x != 0 or velo.y != 0:
-			pos = velo
 		l += delta
 		if shooting and l >= tou:
 			l = 0
@@ -129,6 +127,22 @@ func _physics_process(delta):
 		if shaking_for >= shake_length:
 			shaky = false
 			shaking_for = 0
+	var shooting = false
+	var velo = Vector2(0, 0)
+	if Input.is_action_pressed("SLeft"):
+		shooting = true
+		velo += Vector2(-1, 0)
+	if Input.is_action_pressed("SRight"):
+		shooting = true
+		velo += Vector2(1, 0)
+	if Input.is_action_pressed("SUp"):
+		shooting = true
+		velo += Vector2(0, -1)
+	if Input.is_action_pressed("SDown"):
+		shooting = true
+		velo += Vector2(0, 1)
+	if shooting:
+		pos = velo
 	if abs(pos.y) < abs(pos.x):
 		$Side.show()
 		$Front.hide()
@@ -139,6 +153,8 @@ func _physics_process(delta):
 			$Side.scale.x = -abs($Side.scale.x)
 	else:
 		$Side.hide()
+		$Front.hide()
+		$Back.hide()
 		if pos.y < 0:
 			$Back.show()
 		else:
@@ -159,3 +175,4 @@ func shoot():
 	b.global_position = muzzle.global_position
 	b.rotation = $Muzzlo.rotation
 	get_parent().add_child(b)
+	#$Muzzlo.add_child(load("res://Scenes/Entities/Particles2D.tscn").instance())

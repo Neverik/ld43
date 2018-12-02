@@ -100,7 +100,7 @@ adjustment_contrast = 1.7
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Adjustments", "Background" ]
 
-[node name="Root" type="Node2D" index="0"]
+[node name="Root" type="Node2D"]
 
 [node name="Back" type="ColorRect" parent="." index="0"]
 

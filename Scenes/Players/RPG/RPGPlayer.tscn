@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/RPGPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/gopher_base.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/gopher_eye.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/gopher_teeth.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/gopher_side.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/backpack.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/weapon.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/gopher_side.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/backpack.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -34,26 +35,23 @@ shake_length = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -21.3333, -10.6667 )
-scale = Vector2( 6.5641, 8.20513 )
+position = Vector2( -6.81812, -10.6667 )
+scale = Vector2( 7.68066, 8.20513 )
 shape = SubResource( 1 )
 
 [node name="Muzzlo" type="Node2D" parent="." index="1"]
 
 [node name="Muzzle" type="Node2D" parent="Muzzlo" index="0"]
 
-position = Vector2( 187.191, 0 )
+position = Vector2( 175.372, 0.738688 )
 
 [node name="Front" type="Sprite" parent="." index="2"]
 
 editor/display_folded = true
 visible = false
-position = Vector2( 10.6667, 0 )
+position = Vector2( 3.27979, -4.43213 )
 scale = Vector2( 0.56, 0.56 )
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="Front" index="0"]
 
@@ -75,17 +73,22 @@ texture = ExtResource( 4 )
 
 [node name="Sprite4" type="Sprite" parent="Front" index="3"]
 
+[node name="Sprite5" type="Sprite" parent="Front" index="4"]
+
+position = Vector2( 13.1717, 28.4316 )
+scale = Vector2( 0.910721, 0.944102 )
+texture = ExtResource( 5 )
+
 [node name="Side" type="Sprite" parent="." index="3"]
 
 visible = false
 position = Vector2( -5.33335, -5.33334 )
 scale = Vector2( 0.56, 0.56 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Visibility" ]
 
 [node name="Back" type="Sprite" parent="." index="4"]
 
-editor/display_folded = true
 visible = false
 position = Vector2( 10.5624, -0.00132942 )
 scale = Vector2( 0.562559, 0.56274 )
@@ -93,8 +96,10 @@ texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Back" index="0"]
 
+modulate = Color( 1, 0.5, 0.5, 1 )
 position = Vector2( -7.08101, -9.82139 )
 scale = Vector2( 0.509092, 0.522321 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Visibility" ]
 
 

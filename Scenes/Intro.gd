@@ -2,7 +2,7 @@ extends Control
 
 var lines = [
 	"Hello there!\n (Space to continue)",
-	"I am Gosha the gopher!\nI would like to introduce you to my farm...",
+	"I am Gosha the farmer!\nI would like to introduce you to my farm...",
 	"Oh no! The baby chicks ran away!\nI need to feed them! But I don't have the food.",
 	"I will sacrifice my own food to feed them! Sacrifices must be made!",
 	"But the chicks might not want to take it...\nCan you help me? They will give even more food back if they like it - that means that we won't starve!",
