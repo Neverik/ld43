@@ -26,11 +26,13 @@ export var shake_length = 0.5
 onready var camera = get_node("../Camera2D")
 
 var velocity = Vector2()
+onready var pos = velocity.normalized()
 
 func _ready():
 	if do_shoot:
 		bullet = load(bullet)
-	fade.show()
+	if fade:
+		fade.show()
 	"""initial = scale
 	timer = Timer.new()
 	timer.name = "Timer"
@@ -50,16 +52,18 @@ func get_input():
 	"""if Input.is_action_just_pressed("Reload"):
 		tout()"""
 	if not clicker:
-	    velocity = Vector2()
-	    if Input.is_action_pressed('Right'):
-	        velocity.x += 1
-	    if Input.is_action_pressed('Left'):
-	    	velocity.x -= 1
-	    if Input.is_action_pressed('Down'):
-	        velocity.y += 1
-	    if Input.is_action_pressed('Up'):
-	        velocity.y -= 1
-	    velocity = velocity.normalized() * speed
+		velocity = Vector2()
+		if Input.is_action_pressed('Right'):
+			velocity.x += 1
+		if Input.is_action_pressed('Left'):
+			velocity.x -= 1
+		if Input.is_action_pressed('Down'):
+			velocity.y += 1
+		if Input.is_action_pressed('Up'):
+			velocity.y -= 1
+		pos.x = velocity.x
+		pos.y = velocity.y
+		velocity = velocity.normalized() * speed
 	get_node("../CanvasLayer/Fader").set_progress(health)
 
 func _physics_process(delta):
@@ -86,6 +90,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("SDown"):
 			shooting = true
 			velo += Vector2(0, 1)
+		if velo.x != 0 or velo.y != 0:
+			pos = velo
 		l += delta
 		if shooting and l >= tou:
 			l = 0
@@ -95,7 +101,8 @@ func _physics_process(delta):
 		Manager.die()
 	if health <= 0.2:
 		tout()
-	get_node("../CanvasLayer/Hits").text = str(Manager.total_score)
+	if get_node("../CanvasLayer/Hits"):
+		get_node("../CanvasLayer/Hits").text = str(Manager.total_score)
 	if flashing_in:
 		fade.color.r = 1
 		fade.color.g = 1
@@ -122,6 +129,20 @@ func _physics_process(delta):
 		if shaking_for >= shake_length:
 			shaky = false
 			shaking_for = 0
+	if abs(pos.y) < abs(pos.x):
+		$Side.show()
+		$Front.hide()
+		$Back.hide()
+		if pos.x >= 0:
+			$Side.scale.x = abs($Side.scale.x)
+		else:
+			$Side.scale.x = -abs($Side.scale.x)
+	else:
+		$Side.hide()
+		if pos.y < 0:
+			$Back.show()
+		else:
+			$Front.show()
 
 func _input(event):
 	if event.is_action_pressed('Click'):

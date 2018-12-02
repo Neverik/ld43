@@ -15,6 +15,8 @@ var w = false
 export var fade_speed = 20
 var d = false
 export var die_speed = 10
+var dir = Vector2(0, -13)
+var m = false
 
 func _ready():
 	initial_x = scale.x
@@ -24,18 +26,37 @@ func _ready():
 	$AnimationPlayer.current_animation = "walk"
 	$Horizontal.show()
 	$Vertical.hide()
+	Manager.num_chicks += 1
+	var col = move_and_collide(Vector2(0, 0))
+	if col:
+		if col.collider.is_in_group("Lake"):
+			Manager.num_chicks -= 1
+			queue_free()
 
 func _process(delta):
 	if w:
 		position.y -= fade_speed
 		if not notif.is_on_screen():
+			Manager.num_chicks -= 1
 			queue_free()
 		return
 	if d:
 		var s = delta * die_speed
 		scale -= Vector2(s, s)
 		if scale.x <= 0:
+			Manager.num_chicks -= 1
 			queue_free()
+		return
+	if m:
+		position += dir * delta
+		if not notif.is_on_screen():
+			Manager.num_chicks -= 1
+			queue_free()
+			return
+		return
+	if not notif.is_on_screen() and Manager.num_chicks >= Manager.max_num_chicks:
+		Manager.num_chicks -= 1
+		queue_free()
 		return
 	if scaling:
 		var s = delta * 6
@@ -54,8 +75,9 @@ func _process(delta):
 		if notif.is_on_screen() and col.collider.is_in_group("Bullet"):
 			col.collider.explode()
 			ht()
-		if col.collider.is_in_group("Wall"):
-			die()
+		elif col.collider.is_in_group("Lake"):
+			Manager.num_chicks -= 1
+			queue_free()
 		vel = vel.bounce(col.normal)
 	if is_hit:
 		hit()

@@ -8,15 +8,19 @@ var fading_in = false
 var fading_out = false
 var fade
 var going_to = ""
+var num_chicks = 0
+var max_num_chicks = 50
 
 func _ready():
+	num_chicks = 0
 	_on_scene_loaded(current_scene)
 
 func _on_scene_loaded(scn):
 	fade = scn.get_node("CanvasLayer/Fade")
-	fade.show()
-	fade.color.a = 1
-	fading_in = true
+	if fade:
+		fade.show()
+		fade.color.a = 1
+		fading_in = true
 
 func _process(delta):
 	if fading_in:

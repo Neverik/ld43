@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Guy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/chick_base.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/chick_eye.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/chick_idunno.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/chick_mouth.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Entities/Horizontal.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -70,7 +71,7 @@ rect = Rect2( -10, -10, 20, 20 )
 
 editor/display_folded = true
 visible = false
-position = Vector2( -0.0229068, 1.68742 )
+position = Vector2( -0.0599011, -1.73709 )
 scale = Vector2( 0.24, 0.24 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
@@ -93,44 +94,9 @@ position = Vector2( 116.667, -16.6667 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 5 )
 
-[node name="Horizontal" type="Sprite" parent="." index="3"]
+[node name="Horizontal" parent="." index="3" instance=ExtResource( 6 )]
 
-editor/display_folded = true
-visible = false
-position = Vector2( 0.133619, 2.61894 )
-scale = Vector2( 0.24, 0.24 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="Horizontal" index="0"]
-
-position = Vector2( 39.4814, -45.2032 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Sprite4" type="Sprite" parent="Horizontal" index="1"]
-
-position = Vector2( -27.1853, -45.2032 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Sprite2" type="Sprite" parent="Horizontal" index="2"]
-
-position = Vector2( -63.5016, 18.4076 )
-scale = Vector2( 0.166667, 0.166667 )
-texture = ExtResource( 4 )
-
-[node name="Sprite5" type="Sprite" parent="Horizontal" index="3"]
-
-position = Vector2( 62.7222, 15.778 )
-scale = Vector2( 0.166667, 0.166667 )
-texture = ExtResource( 4 )
-
-[node name="Sprite3" type="Sprite" parent="Horizontal" index="4"]
-
-position = Vector2( 0.961566, 16.2041 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 5 )
+position = Vector2( -0.0598982, -1.91679 )
 
 [node name="Back" type="Sprite" parent="." index="4"]
 
