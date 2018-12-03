@@ -259,7 +259,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Adjustments", "Background" ]
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" index="0"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="0"]
 
